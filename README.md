@@ -1,8 +1,8 @@
 closure-compiler-service
 ========================
-Compile JavaScript with the Google [Closure compiler service](\
-https://developers.google.com/closure/compiler/docs/api-ref).  No Java
-dependency.
+Compile JavaScript with the Google
+[Closure compiler service](https://developers.google.com/closure/compiler/docs/api-ref).
+No Java dependency.
 
 
 Installation
