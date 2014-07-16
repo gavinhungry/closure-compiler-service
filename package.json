@@ -19,6 +19,7 @@
   "main": "ccs.js",
 
   "dependencies": {
-    "request": "2.37.x"
+    "request": "2.37.x",
+    "querystring": "0.2.x"
   }
 }
