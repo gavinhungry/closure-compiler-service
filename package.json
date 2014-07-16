@@ -17,6 +17,9 @@
   },
 
   "main": "ccs.js",
+  "bin": {
+    "closure-service": "./ccs.js"
+  },
 
   "dependencies": {
     "request": "2.37.x",
