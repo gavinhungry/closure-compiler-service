@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * closure-compiler-service - compile scripts with the Closure compiler service
  * https://github.com/gavinhungry/closure-compiler-service
