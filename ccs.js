@@ -30,15 +30,21 @@
   /**
    * Compile a string of JavaScript with the Closure compiler service
    *
-   * @param {String} js_code - JavaScript code to compile
+   * @param {String|Buffer} js_code - JavaScript code to compile
    * @param {Object} [options] - API options
    * @param {Function} callback(errs, code)
    */
   ccs.compile = function(js_code, options, callback) {
+    js_code = js_code || '';
     var opts = options || {};
     if (typeof options === 'function') {
       opts = {};
       callback = options;
+    }
+
+    // allow buffers to be passed directly
+    if (typeof js_code.toString === 'function') {
+      js_code = js_code.toString();
     }
 
     opts.compilation_level = opts.compilation_level || 'SIMPLE_OPTIMIZATIONS';
