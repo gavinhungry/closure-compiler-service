@@ -1,6 +1,6 @@
 {
   "name": "closure-compiler-service",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "author": "Gavin Lloyd <gavinhungry@gmail.com>",
   "description": "Compile JavaScript with the Google Closure compiler service",
   "license": "MIT",
@@ -22,7 +22,7 @@
 
   "main": "ccs.js",
   "bin": {
-    "closure-service": "./ccs.js"
+    "closure-service": "./cli.js"
   },
 
   "dependencies": {
