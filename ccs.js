@@ -14,12 +14,7 @@
   var querystring = require('querystring');
 
   // https://developers.google.com/closure/compiler/docs/api-ref
-  var API_URI = 'https://closure-compiler.appspot.com/compile';
-
-  // https://github.com/mikeal/request/issues/644
-  var API = API_URI + '?' + querystring.encode({
-    output_info: ['compiled_code', 'errors']
-  });
+  var API = 'https://closure-compiler.appspot.com/compile';
 
   var die = function(msg) {
     console.error(msg);
@@ -27,7 +22,27 @@
   };
 
   /**
+   * Get API URI from options
+   *
+   * @param {Object} [opts] - API options
+   * @return {String} full API URI, with API options as URL-encoded strings
+   */
+  ccs.uri = function(opts) {
+    opts = opts || {};
+
+    opts.output_info = opts.output_info || ['compiled_code', 'errors'];
+    opts.compilation_level = opts.compilation_level || 'SIMPLE_OPTIMIZATIONS';
+    opts.output_format = opts.output_format || 'json';
+
+    var encoded = querystring.encode(opts);
+
+    return encoded ? (API + '?' + encoded) : API;
+  };
+
+  /**
    * Compile a string of JavaScript with the Closure compiler service
+   *
+   * Pass null as first argument if specifying code_url or js_code API options
    *
    * @param {String|Buffer} js_code - JavaScript code to compile
    * @param {Object} [options] - API options
@@ -46,12 +61,9 @@
       js_code = js_code.toString();
     }
 
-    opts.compilation_level = opts.compilation_level || 'SIMPLE_OPTIMIZATIONS';
-    opts.output_format = opts.output_format || 'json';
+    if (js_code) { opts.js_code = js_code; }
 
-    opts.js_code = js_code;
-
-    request.post({ uri: API }, function(err, res, body) {
+    request.post({ uri: ccs.uri(opts) }, function(err, res, body) {
       var result, ex = null;
 
       try {
@@ -63,7 +75,7 @@
       var errs = (result && result.errors) ? result.errors : ex;
       var code = (result && result.compiledCode) ? result.compiledCode : '';
       callback(errs, code);
-    }).form(opts);
+    });
   };
 
   module.exports = ccs;
