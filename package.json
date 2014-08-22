@@ -1,6 +1,6 @@
 {
   "name": "closure-compiler-service",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "Gavin Lloyd <gavinhungry@gmail.com>",
   "description": "Compile JavaScript with the Google Closure compiler service",
   "license": "MIT",
