@@ -18,7 +18,7 @@
     var js_code = fs.readFile(filename, function(err, buf) {
       if (err) { die(err); }
 
-      ccs.compile(buf.toString(), function(errs, code) {
+      ccs.compile(buf, function(errs, code) {
         if (errs) { die(errs); }
         console.log(code);
       });
