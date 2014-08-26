@@ -41,7 +41,7 @@
    *
    * @param {String|Buffer} js_code - JavaScript code to compile
    * @param {Object} [options] - API options
-   * @param {Function} callback(errs, code)
+   * @param {Function} [callback](errs, code) - defaults to console output
    */
   ccs.compile = function(js_code, options, callback) {
     js_code = js_code || '';
@@ -49,6 +49,13 @@
     if (typeof options === 'function') {
       opts = {};
       callback = options;
+    }
+
+    if (typeof callback !== 'function') {
+      callback = function(errs, code) {
+        if (errs) { return console.error(errs); }
+        console.log(code);
+      }
     }
 
     // allow buffers to be passed directly
