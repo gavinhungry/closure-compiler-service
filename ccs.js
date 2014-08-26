@@ -16,11 +16,6 @@
   // https://developers.google.com/closure/compiler/docs/api-ref
   var API = 'https://closure-compiler.appspot.com/compile';
 
-  var die = function(msg) {
-    console.error(msg);
-    process.exit(1);
-  };
-
   /**
    * Get API URI from options
    *

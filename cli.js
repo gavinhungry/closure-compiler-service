@@ -3,6 +3,11 @@
 (function() {
   'use strict';
 
+  var die = function(msg) {
+    console.error(msg);
+    process.exit(1);
+  };
+
   var ccs = require('closure-compiler-service');
   var fs = require('fs');
 
