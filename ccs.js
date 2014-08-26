@@ -63,9 +63,7 @@
       js_code = js_code.toString();
     }
 
-    if (js_code) { opts.js_code = js_code; }
-
-    request.post({ uri: ccs.uri(opts) }, function(err, res, body) {
+    var r = request.post({ uri: ccs.uri(opts) }, function(err, res, body) {
       var result, ex = null;
 
       try {
@@ -78,6 +76,8 @@
       var code = (result && result.compiledCode) ? result.compiledCode : '';
       callback(errs, code);
     });
+
+    r.form({ js_code: js_code });
   };
 
   module.exports = ccs;
