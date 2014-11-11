@@ -3,7 +3,7 @@
 (function() {
   'use strict';
 
-  var ccs = require('closure-compiler-service');
+  var ccs = require('./ccs.js');
   var fs  = require('fs');
   var pkg = require('./package.json');
 
@@ -32,8 +32,9 @@
     var js_code = fs.readFile(arg, function(err, buf) {
       if (err) { die(err); }
 
-      ccs.compile(buf, function(errs, code) {
+      ccs.compile(buf, function(errs, warns, code) {
         if (errs) { die(errs); }
+        if (warns) { console.warn(warns); }
         console.log(code);
       });
     });

@@ -25,7 +25,7 @@
   ccs.uri = function(opts) {
     opts = opts || {};
 
-    opts.output_info = opts.output_info || ['compiled_code', 'errors'];
+    opts.output_info = opts.output_info || ['compiled_code', 'errors', 'warnings'];
     opts.compilation_level = opts.compilation_level || 'SIMPLE_OPTIMIZATIONS';
     opts.output_format = opts.output_format || 'json';
 
@@ -41,7 +41,7 @@
    *
    * @param {String|Buffer} js_code - JavaScript code to compile
    * @param {Object} [options] - API options
-   * @param {Function} [callback](errs, code) - defaults to console output
+   * @param {Function} [callback](errs, warns, code) - defaults to console output
    */
   ccs.compile = function(js_code, options, callback) {
     js_code = js_code || '';
@@ -52,8 +52,9 @@
     }
 
     if (typeof callback !== 'function') {
-      callback = function(errs, code) {
+      callback = function(errs, warns, code) {
         if (errs) { return console.error(errs); }
+        if (warns) { console.warn(warns); }
         console.log(code);
       }
     }
@@ -64,7 +65,7 @@
     }
 
     var r = request.post({ uri: ccs.uri(opts) }, function(err, res, body) {
-      var result, ex = null;
+      var result = {}, ex = null;
 
       try {
         result = JSON.parse(body);
@@ -72,9 +73,10 @@
         ex = ex;
       }
 
-      var errs = (result && result.errors) ? result.errors : ex;
-      var code = (result && result.compiledCode) ? result.compiledCode : '';
-      callback(errs, code);
+      var errs = result.errors || result.serverErrors || ex;
+      var code = result.compiledCode || '';
+      var warns = result.warnings || null;
+      callback(errs, warns, code);
     });
 
     r.form({ js_code: js_code });
