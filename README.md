@@ -31,9 +31,9 @@ Output is written to stdout, and can thus be redirected to a file:
      *
      * @param {String|Buffer} js_code - JavaScript code to compile
      * @param {Object} [options] - API options
-     * @param {Function} [callback](errs, code) - defaults to console output
+     * @param {Function} [callback](errs, warns, code) - defaults to console output
      */
-    ccs.compile(input, function(errs, code) {
+    ccs.compile(input, function(errs, warns, code) {
       // `code` is the compiled result
     });
 
@@ -43,7 +43,7 @@ the callback function), which are passed to the API:
 
     ccs.compile(js_code, {
       compilation_level: 'WHITESPACE_ONLY'
-    }, function(errs, code) {
+    }, function(errs, warns, code) {
       // ...
     });
 
@@ -51,7 +51,7 @@ Pass an array to stipulate multiple values for the same option:
 
     ccs.compile(js_code, {
       code_url: [url1, url2 /*, ... */]
-    }, function(errs, code) {
+    }, function(errs, warns, code) {
       // ...
     });
 
@@ -61,7 +61,7 @@ Pass an array to stipulate multiple values for the same option:
 ### Default Options
 
     output_format     = 'json' // you won't want to change this
-    output_info       = ['compiled_code', 'errors']
+    output_info       = ['compiled_code', 'errors', 'warnings']
     compilation_level = 'SIMPLE_OPTIMIZATIONS'
 
 
