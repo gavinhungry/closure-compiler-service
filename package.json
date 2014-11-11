@@ -26,7 +26,7 @@
   },
 
   "dependencies": {
-    "request": "2.40.x",
+    "request": "2.47.x",
     "querystring": "0.2.x"
   }
 }
