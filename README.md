@@ -69,5 +69,4 @@ compilation_level = 'SIMPLE_OPTIMIZATIONS'
 
 License
 -------
-Released under the terms of the
-[MIT license](http://tldrlegal.com/license/mit-license). See **LICENSE**.
+This software is released under the terms of the **MIT license**. See `LICENSE`.
