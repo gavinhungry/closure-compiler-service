@@ -22,11 +22,12 @@
 
   "main": "ccs.js",
   "bin": {
-    "closure-service": "./cli.js"
+    "closure-service": "bin/closure-service"
   },
 
   "dependencies": {
-    "request": "2.67.x",
+    "commander": "2.9.0",
+    "request": "2.69.x",
     "querystring": "0.2.x"
   }
 }
