@@ -19,8 +19,7 @@
     "type": "git",
     "url": "git://github.com/gavinhungry/closure-compiler-service.git"
   },
-
-  "main": "ccs.js",
+  "main": "lib/closure-service.js",
   "bin": {
     "closure-service": "bin/closure-service"
   },
